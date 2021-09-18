@@ -5,11 +5,12 @@ import (
 	"testing"
 )
 
-var quickArry = []int{8, 1, 5, 7, 2, 3, 9, 6, 4}
+var quickArry = []int{8, 1, 5, 7, 2, 3, 9, 6, 4, 10, 19, 18, 12, 11, 15, 13, 14, 17, 16}
+var quickArry2 = []int{1, 1, 3, 1, 1, 2, 3, 2, 2}
 
 func TestQucik(t *testing.T) {
-	QuickSort(quickArry, 0, len(quickArry)-1)
-	fmt.Printf("%v", quickArry)
+	QuickSort(quickArry2, 0, len(quickArry2)-1)
+	fmt.Printf("%v", quickArry2)
 }
 
 func QuickSort(a []int, low, high int) {
@@ -21,20 +22,19 @@ func QuickSort(a []int, low, high int) {
 }
 
 func partition(a []int, low, high int) int {
-	pivot := a[low]
+	pivot := high
+	i := low  // 左指针
+	j := high // 右指针
 
-	for low != high {
-		for low < high && pivot <= a[high] {
-			high--
+	for i != j {
+		for i < j && a[i] <= a[pivot] { // 从左边开始扫描
+			i++
 		}
-		a[low], a[high] = a[high], a[low]
-
-		for low < high && pivot >= a[low] {
-			low++
+		for i < j && a[j] >= a[pivot] {
+			j--
 		}
-		a[low], a[high] = a[high], a[low]
+		a[i], a[j] = a[j], a[i] // 交换元素
 	}
-
-	a[low] = pivot
-	return low
+	a[i], a[pivot] = a[pivot], a[i] // pivot放置在最终的位置上
+	return i
 }
