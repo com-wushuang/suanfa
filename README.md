@@ -83,3 +83,52 @@ func partition(a []int, low, high int) int {
 	return i
 }
 ```
+
+### 归并排序
+归并排序最重要的函数是merge函数,相较于堆排序和快速排序,归并排序是相对简单的。
+- 合并左右序列到临时数组b中
+- 左右序列各一个扫描指针i,j
+- 如果a[i]小于a[j],则b[t]=a[i],i++;否则b[t]=a[j],j++
+- 移动b数组的指针,t++
+- 当左序列已经扫描完毕，那么将右序列直接拷贝到临时数组
+- 当右序列已经扫描完毕，那么将左序列直接拷贝到临时数组
+- 将排序完的元素拷贝到原来的数组a中
+```go
+package sort
+
+func merge(a, b []int, left, mid, right int) {
+	i := left
+	j := mid + 1
+	t := 0
+	for i <= mid && j <= right { // 左右序列扫描
+		if a[i] < a[j] {
+			b[t] = a[i]
+			i++
+		} else {
+			b[t] = a[j]
+			j++
+		}
+		t++
+	}
+
+	for i <= mid { // 当右序列已经扫描完毕，那么将左序列直接拷贝到临时数组
+		b[t] = a[i]
+		t++
+		i++
+	}
+
+	for j <= right { // 当左序列已经扫描完毕，那么将右序列直接拷贝到临时数组
+		b[t] = a[j]
+		t++
+		j++
+	}
+
+	t = 0
+	for left <= right { // 将排序完的元素拷贝到原来的数组a中 ,注意拷贝到a数组中的位置
+		a[left] = b[t]
+		t++
+		left++
+	}
+}
+
+```
