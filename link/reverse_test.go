@@ -8,6 +8,10 @@ func TestReverse(t *testing.T) {
 	li := InitList()
 	li = Reverse(li)
 	PrintList(li)
+
+	li2 := InitList()
+	li2 = NestedReverse(li2)
+	print(li2)
 }
 
 func Reverse(head *ListNode) *ListNode {
@@ -26,6 +30,12 @@ func Reverse(head *ListNode) *ListNode {
 	return pre
 }
 
-func NestedReverse(head *ListNode) {
-
+func NestedReverse(head *ListNode) *ListNode {
+	if head.Next != nil {
+		return head
+	}
+	newHead := NestedReverse(head.Next)
+	head.Next.Next = head
+	head.Next = nil
+	return newHead
 }
