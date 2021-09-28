@@ -23,6 +23,21 @@ func InitList() *ListNode {
 	return head
 }
 
+func InitListWithArray(a []int) *ListNode {
+	head := &ListNode{
+		Val: a[0],
+	}
+	p := head
+	for i := 1; i < len(a); i++ {
+		newNode := &ListNode{
+			Val: a[i],
+		}
+		p.Next = newNode
+		p = p.Next
+	}
+	return head
+}
+
 func PrintList(head *ListNode) {
 	for p := head; p != nil; p = p.Next {
 		fmt.Print(p.Val, " ")
