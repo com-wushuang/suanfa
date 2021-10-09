@@ -6,5 +6,6 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+func InitTree(a []int) {
 
-
+}
