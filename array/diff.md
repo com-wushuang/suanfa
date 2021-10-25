@@ -51,7 +51,7 @@
 - 最后对得出的差分数组求前缀和即可得到本题答案
 
 ### 代码
-```
+```go
 func corpFlightBookings(bookings [][]int, n int) []int {
 	diff := make([]int, 5) // 原始数组的差分数组
 	for _, booking := range bookings {
