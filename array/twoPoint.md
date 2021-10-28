@@ -21,7 +21,7 @@ func isLoop(head *ListNode) bool {
 ### 寻找环的起始节点
 - 相遇时，fast走了`2k`步，slow走了`k`步
 - 设环的起始点`loopStart`和相遇点`meetPoint`的距离为`m`
-- 那么链表头节点`head`到`meetPoint`的距离为`k-m`
+- 那么链表头节点`head`到`loopStart`的距离为`k-m`
 - 因为fast超了slow一圈，所以圈的大小为k
 - 推导出，相遇点`meetPoint`到环的起始点`loopStart`的距离也为`k-m`
 - 因此利用这个，我们先让快慢指针第一次相遇

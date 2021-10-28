@@ -1,19 +1,14 @@
-package array
+## 滑动窗口
+滑动窗口能解决大部分子串的问题，而且代码都是有固定的框架，掌握了框架代码和算法的核心思想，能解决大部分子串的问题
+### 最小覆盖子串
+- 题意：在 S(source) 中找到包含 T(target) 中全部字母的一个子串，且这个子串一定是所有可能子串中最短的
+- 在字符串 S 中使用双指针中的左右指针技巧，初始化 left = right = 0，把索引左闭右开区间 [left, right) 称为一个「窗口」
+- 先不断地增加 right 指针扩大窗口 [left, right)，直到窗口中的字符串符合要求（包含了 T 中的所有字符）
+- 此时，停止增加 right，转而不断增加 left 指针缩小窗口 [left, right)，直到窗口中的字符串不再符合要求（不包含 T 中的所有字符了）。同时，每次增加 left，我们都要更新一轮结果
+- 重复上面的两步，直到 right 到达字符串 S 的尽头
+这个思路其实也不难，第 2 步相当于在寻找一个「可行解」，然后第 3 步在优化这个「可行解」，最终找到最优解，也就是最短的覆盖子串。
 
-import (
-	"fmt"
-	"testing"
-)
-
-func TestSlideWindow(t *testing.T) {
-	fmt.Println(minimumSubstring("ADOBECODEBANC", "ABC"))
-	fmt.Println(checkInclusion("eidbaooo", "ab"))
-	fmt.Println(checkInclusion("eidboaoo", "ab"))
-	fmt.Println(findAnagrams("cbaebabacd", "abc"))
-	fmt.Println(lengthOfLongestSubstring("abcabcbb"))
-}
-
-// 最小覆盖子串
+```go
 func minimumSubstring(a, t string) string {
 	// window哈希表，用来记录窗口中包含的T的字符
 	window := make(map[byte]int)
@@ -70,8 +65,15 @@ func minimumSubstring(a, t string) string {
 	}
 	return string(chars[start : start+length])
 }
+```
 
-// 字符串排列
+### 字符串排列
+给你两个字符串 s1 和 s2 ，写一个函数来判断 s2 是否包含 s1 的排列。如果是，返回 true ；否则，返回 false
+- 题意：给你一个 S 和一个 T，请问你 S 中是否存在一个子串，包含 T 中所有字符且不包含其他字符？
+- 算法的框架和第一题一样，不同点在于，当窗口中包含了所有的T中字符时，如果窗口的长度恰好等于T的长度，那么返回true
+- 否则，继续移动left指针
+
+```go
 func checkInclusion(a, t string) bool {
 	window := make(map[byte]int)
 
@@ -118,8 +120,15 @@ func checkInclusion(a, t string) bool {
 	}
 	return false
 }
+```
 
-// 找所有字母异位词
+### 找所有字母异位词
+给定两个字符串s和 p，找到s中所有p的异位词的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
+注：异位词 指由相同字母重排列形成的字符串（包括相同的字符串）。
+- 题意：相当于，输入一个串 S，一个串 T，找到 S 中所有 T 的排列，返回它们的起始索引。
+- 这个题和上一题本质上没有区别，只是返回结果的不同
+
+```go
 func findAnagrams(a, t string) []int {
 	res := make([]int, 0)
 
@@ -163,8 +172,13 @@ func findAnagrams(a, t string) []int {
 	}
 	return res
 }
+```
+### 最长无重复子串
+给定一个字符串 s ，请你找出其中不含有重复字符的`最长子串`的长度。
+- 先移动`right`指针，每次进入窗口的字符都存放在window哈希表中
+- 当进入的字符重复了的时候，开始移动`left`指针，缩小窗口，使得窗口中不包含重复的字符
 
-//最长子串的长度
+```go
 func lengthOfLongestSubstring(a string) int {
 	window := make(map[byte]int)
 	left, right := 0, 0
@@ -192,3 +206,4 @@ func max(a, b int) int {
 	}
 	return b
 }
+```
