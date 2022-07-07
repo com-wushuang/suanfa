@@ -12,17 +12,19 @@
 package sort
 
 func HeapSort(a []int, n int) {
+	// 建堆
 	for i := n/2 - 1; i >= 0; i-- { // 从最后一个节点(n-1)的父节点开始
 		heapify(a, i, n)
 	}
     
+	// 堆排序
 	for i := n - 1; i > 0; i-- {
 		a[0], a[i] = a[i], a[0]
 		heapify(a, 0, i) // 因为第0个节点被调换了位置，那么需要调整，保持为大顶堆
 	}
 }
 
-func heapify(a []int, i, n int) {
+func heapify(a []int, i, n int) { // 记住这三个参数: 数组、要调整的节点下标、数组的长度
 	largest := i
 	lson := 2*i + 1 // 堆的性质
 	rson := 2*i + 2 // 堆的性质
@@ -53,6 +55,7 @@ func heapify(a []int, i, n int) {
 - 循环上述过程，就完成了排序
 
 ### 快速排序
+- 快速排序采用的是分治的思想
 - 快速排序最重要的函数就是分区函数`partition`
 - 分区函数的目的是，找到`pivot`在序列中的正确位置，使得左边的元素都小于它，右边的元素都大于它
 - 选出最后一个元素作为`pivot`
@@ -150,7 +153,6 @@ func Shell(a []int) {
         
 		// 对所有的子序列进行插入排序
 		for i := inc; i < length; i++ {
-            
             // 单个子序列插入排序
 			for j := i - inc; j >= 0; j = j - inc {
 				if a[j] > a[i] {

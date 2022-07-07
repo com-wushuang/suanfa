@@ -20,8 +20,6 @@ func Select(a []int) {
 				minIndex = j
 			}
 		}
-		tmp := a[i]
-		a[i] = a[minIndex]
-		a[minIndex] = tmp
+		a[i],a[minIndex]=a[minIndex],a[i]
 	}
 }
