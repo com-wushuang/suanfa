@@ -43,5 +43,4 @@ func heapify(a []int, i, n int) {
 		// 递归调用，使得largest节点也满足大顶堆的性质(因为调整过后largest节点可能不满足大顶堆性质)
 		heapify(a, largest, n)
 	}
-
 }

@@ -5,11 +5,11 @@ import (
 	"testing"
 )
 
-var selectArry = []int{8, 1, 5, 7, 2, 3, 9, 6, 4}
+var selectArray = []int{8, 1, 5, 7, 2, 3, 9, 6, 4}
 
 func TestSelect(t *testing.T) {
-	Select(selectArry)
-	fmt.Printf("%v", selectArry)
+	Select(selectArray)
+	fmt.Printf("%v", selectArray)
 }
 
 func Select(a []int) {

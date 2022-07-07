@@ -5,11 +5,11 @@ import (
 	"testing"
 )
 
-var bubleArry = []int{8, 1, 5, 7, 2, 3, 9, 6, 4}
+var bubbleArray = []int{8, 1, 5, 7, 2, 3, 9, 6, 4}
 
 func TestBubble(t *testing.T) {
-	Bubble(bubleArry)
-	fmt.Printf("%v", bubleArry)
+	Bubble(bubbleArray)
+	fmt.Printf("%v", bubbleArray)
 }
 
 func Bubble(a []int) {
