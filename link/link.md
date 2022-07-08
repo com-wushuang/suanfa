@@ -1,5 +1,13 @@
-## 快慢指针
-### 判断链表是否有环
+# 合并链表
+## 合并两个有序链表
+- 题目:给你输入两个有序链表，请你把他俩合并成一个新的有序链表
+- 
+```go
+
+```
+
+# 快慢指针
+## 判断链表是否有环
 - 如果链表存在环，那么扫描链表不会停止下来
 - 利用快慢指针，那么一定会有快慢指针相遇的时候
 - 就像是在环形的赛道中赛跑，跑的快的人一定会超跑的慢的人一圈
@@ -18,7 +26,7 @@ func isLoop(head *ListNode) bool {
 	return false
 }
 ```
-### 寻找环的起始节点
+## 寻找环的起始节点
 - 相遇时，fast走了`2k`步，slow走了`k`步
 - 设环的起始点`loopStart`和相遇点`meetPoint`的距离为`m`
 - 那么链表头节点`head`到`loopStart`的距离为`k-m`
@@ -53,7 +61,7 @@ func loopIndex(head *ListNode) *ListNode {
 	return slow
 }
 ```
-### 链表的中点
+## 链表的中点
 - 快指针一次前进两步，慢指针一次前进一步，当快指针到达链表尽头时，慢指针就处于链表的中间位置
 - 当链表的长度是奇数时，slow 恰巧停在中点位置；如果长度是偶数，slow 最终的位置是中间偏右
 ```go
@@ -69,7 +77,7 @@ func midOfLink(head *ListNode) *ListNode {
 	return slow
 }
 ```
-### 删除链表倒数第n个节点
+## 删除链表倒数第n个节点
 - 使用快慢指针，让快指针先走 n 步，然后快慢指针开始同速前进。
 - 这样当快指针走到链表末尾 null 时，慢指针所在的位置就是倒数第 n 个链表节点（n 不会超过链表长度）。
 ```go
@@ -98,23 +106,3 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	return head
 }
 ```
-## 左右指针
-左右指针在数组中实际是指两个索引值，一般初始化为 left = 0, right = len(nums) - 1 
-### 二分查找
-略
-### 两数之和
-略
-### 反转数组
-- 将一个数组反转，初始化左右数组指针，然后左右元素互相交换
-```go
-func reverseArray(a []int) []int {
-	left := 0
-	right := len(a) - 1
-	for left < right {
-		a[left], a[right] = a[right], a[left]
-	}
-	return a
-}
-```
-### 滑动窗口算法
-略

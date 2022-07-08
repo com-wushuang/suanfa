@@ -162,3 +162,61 @@ func reverseArray(a []int) []int {
 	}
 	return a
 }
+
+func TestIsPalindrome(t *testing.T) {
+	a := "abc"
+	fmt.Println(isPalindrome(a))
+
+	b := "aba"
+	c := "abba"
+	fmt.Println(isPalindrome(b))
+	fmt.Println(isPalindrome(c))
+}
+
+// 回文串
+func isPalindrome(a string) bool {
+	charArray := []rune(a)
+	left, right := 0, len(a)-1
+	for left < right {
+		if charArray[left] != charArray[right] {
+			return false
+		}
+		left++
+		right--
+	}
+	return true
+}
+
+func TestLongestPalindrome(t *testing.T) {
+	a := "babad"
+	fmt.Println(longestPalindrome(a))
+	b := "cbbd"
+	fmt.Println(longestPalindrome(b))
+}
+
+// 最长回文串
+func longestPalindrome(a string) string {
+	charArray := []rune(a)
+	var res []rune
+	for i := 0; i < len(charArray); i++ {
+		s1 := palindrome(charArray, i, i)
+		s2 := palindrome(charArray, i, i+1)
+		if len(res) < len(s1) {
+			res = s1
+		}
+		if len(res) < len(s2) {
+			res = s2
+		}
+	}
+	return string(res)
+}
+
+func palindrome(charArray []rune, l, r int) []rune {
+	// 防止索引越界
+	for l >= 0 && r < len(charArray) && charArray[l] == charArray[r] {
+		// 双指针，向两边展开
+		l--
+		r++
+	}
+	return charArray[l+1 : r]
+}

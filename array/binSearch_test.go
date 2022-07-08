@@ -14,6 +14,10 @@ func TestBinSearch(t *testing.T) {
 	fmt.Println(leftBound(a, 17))
 	fmt.Println(leftBound(a, 55))
 
+	fmt.Println(rightBound(a, 16))
+	fmt.Println(rightBound(a, 17))
+	fmt.Println(rightBound(a, -1))
+
 }
 
 func binarySearch(a []int, target int) int {
