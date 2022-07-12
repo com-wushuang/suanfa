@@ -84,13 +84,18 @@ func isLoop(head *ListNode) bool {
 }
 ```
 ## 寻找环的起始节点
-- 相遇时，fast走了`2k`步，slow走了`k`步
-- 设环的起始点`loopStart`和相遇点`meetPoint`的距离为`m`
-- 那么链表头节点`head`到`loopStart`的距离为`k-m`
-- 因为fast超了slow一圈，所以圈的大小为k
-- 推导出，相遇点`meetPoint`到环的起始点`loopStart`的距离也为`k-m`
-- 因此利用这个，我们先让快慢指针第一次相遇
-- 相遇后，让慢指针从头开始，两个指针一次走一步，再一次相遇的时候，就是环的起点
+![link_loop](https://github.com/com-wushuang/suanfa/blob/main/image/link_loop.webp)
+设环长度为 `R` ，且距离具有方向性，例如`CB`是 `C` 点到 `B` 点的距离，`BC`是 `B` 点到 `C` 点的距离，`CB!=BC`。当环时，`fast` 和 `slow` 都顺时针到了 `B` 点，则此时：
+- `slow` 走的距离：`AC+CB`
+- `fast` 走的距离：`AC+k*R+CB(k=0,1,2...)`
+- 由于 `fast` 每次走 `2` 个节点，`slow` 每次走 `1` 个节点，所以：
+- `2(AC+CB) = AC+k*R+CB`
+- `AC+CB = k*R`
+- `AC+CB = (k-1)*R+R`
+- `AC = (k-1)*R+R-CB`
+- `AC = (k-1)*R+BC`
+- 从最终的表达式可以看出来，`AC` 的距离等于绕环若干圈后再加上 `BC` 的距离，也就是说慢指针从A点出发以速度1前进、快指针从 `B` 点出发以速度 `1` 前进，则慢指针到 `C` 点时，快指针也必然到了。
+
 ```go
 // 返回链表环的起始点
 func loopIndex(head *ListNode) *ListNode {
